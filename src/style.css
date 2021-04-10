@@ -1,0 +1,21 @@
+main {
+  color: green;
+}
+
+main::before {
+  content:"przed ";
+  color:red;
+}
+
+main::after {
+  content: ' ' attr(xxx);
+  color:blue;
+}
+
+main.kontent-glowny {
+  background-color: black;
+}
+
+main[xxx="Helloł"] {
+  color:yellow;
+}
