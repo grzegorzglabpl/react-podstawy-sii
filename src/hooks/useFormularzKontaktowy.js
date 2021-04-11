@@ -53,26 +53,39 @@ export const useFormularzKontaktowy = () => {
   const onClickSubmit = event => {
     event.preventDefault();
     console.log("onClickSubmit");
-    dispatch({ type: actions.CLICK_SUBMIT, payload: event });
+
+    /*
+    const formData = new FormData(event.target);
+    var object = {};
+    formData.forEach((value, key) => (object[key] = value));
+    var json = JSON.stringify(object, ["Imie"]);
+
+    console.log(json);
+  */
+
+    dispatch({ type: actions.CLICK_SUBMIT, payload: event.target });
   };
 
   const onChangeImie = event => {
     event.preventDefault();
-    const imie = event.currentTarget.value;
+
+    console.log("onChangeImie");
+
+    const imie = event.target.value;
 
     dispatch({ type: actions.CHANGE_IMIE, payload: imie });
   };
 
   const onChangeNazwisko = event => {
     event.preventDefault();
-    const nazwisko = event.currentTarget.value;
+    const nazwisko = event.target.value;
 
     dispatch({ type: actions.CHANGE_NAZWISKO, payload: nazwisko });
   };
 
   const onChangeEmail = event => {
     event.preventDefault();
-    const email = event.currentTarget.value;
+    const email = event.target.value;
     dispatch({ type: actions.CHANGE_EMAIL, payload: email });
   };
 

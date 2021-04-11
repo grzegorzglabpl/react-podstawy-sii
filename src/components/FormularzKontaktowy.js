@@ -60,7 +60,7 @@ const FormularzKontaktowy = () => {
         <legend>Zgody na przetwarzanie RODO</legend>
       </fieldset>
       <fieldset>
-        <button type="submit">Wyślij 1</button>
+        <button type="submit">Wyślij</button>
         <button type="reset">Wyczyść</button>
       </fieldset>
     </form>
