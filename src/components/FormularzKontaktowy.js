@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import Hooks from "../hooks";
 import "./FormularzKontaktowy.css";
+import global from "../global";
 
 const FormularzKontaktowy = () => {
   const formularzKontaktowy = Hooks.useFormularzKontaktowy();
+
+  //const [zgodaRodo, setZgodaRodo] = useState(true);
 
   /*
   const [kontaktImie, setKontaktImie] = useState("John");
@@ -14,6 +17,8 @@ const FormularzKontaktowy = () => {
   console.log(kontaktNazwisko);
   console.log(kontaktEmail);
 */
+
+  console.log(formularzKontaktowy.zgodyRodo);
 
   return !formularzKontaktowy.clickSubmit ? (
     <form
@@ -29,8 +34,8 @@ const FormularzKontaktowy = () => {
           id="imie"
           type="text"
           name="Imie"
-          value={formularzKontaktowy.kontaktImie}
-          onChange={formularzKontaktowy.onChangeImie}
+          value={global.kontaktImie}
+          onChange={global.useFormularzKontaktowy.onChangeImie}
         />
 
         <label>Podaj nazwisko:</label>
@@ -58,6 +63,24 @@ const FormularzKontaktowy = () => {
       </fieldset>
       <fieldset>
         <legend>Zgody na przetwarzanie RODO</legend>
+        <legend>TAK</legend>
+        <input
+          id="zgodaTak"
+          type="radio"
+          name="zgodaRODO"
+          value="true"
+          checked={formularzKontaktowy.zgodyRodo}
+          onChange={formularzKontaktowy.onChangeRodo}
+        />
+        <legend>NIE</legend>
+        <input
+          id="zgodaTak"
+          type="radio"
+          name="zgodaRODO"
+          value="false"
+          checked={!formularzKontaktowy.zgodyRodo}
+          onChange={formularzKontaktowy.onChangeRodo}
+        />
       </fieldset>
       <fieldset>
         <button type="submit">Wyślij</button>

@@ -1,6 +1,7 @@
-import { useReducer } from "react";
+import { useReducer, useEffect, useState } from "react";
 
 const initialState = {
+  zgodyRodo: false,
   clickSubmit: false,
   kontaktImie: "John",
   kontaktNazwisko: "Kowalsky",
@@ -11,7 +12,8 @@ const actions = {
   CLICK_SUBMIT: "CLICK_SUBMIT",
   CHANGE_IMIE: "CHANGE_IMIE",
   CHANGE_NAZWISKO: "CHANGE_NAZWISKO",
-  CHANGE_EMAIL: "CHANGE_EMAIL"
+  CHANGE_EMAIL: "CHANGE_EMAIL",
+  CHANGE_ZGODY_RODO: "CHANGE_ZGODY_RODO"
 };
 
 const reducer = (state, action) => {
@@ -29,15 +31,21 @@ const reducer = (state, action) => {
       };
 
     case actions.CHANGE_NAZWISKO:
-      return {
+      return updateStateRepository({
         ...state,
         kontaktNazwisko: action.payload
-      };
+      });
 
     case actions.CHANGE_EMAIL:
       return {
         ...state,
         kontaktEmail: action.payload
+      };
+
+    case actions.CHANGE_ZGODY_RODO:
+      return {
+        ...state,
+        zgodyRodo: action.payload
       };
 
     default:
@@ -49,6 +57,22 @@ const reducer = (state, action) => {
 
 export const useFormularzKontaktowy = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const [imie, setImie] = useState(state.kontaktImie);
+
+  /*
+  const repository = state => {
+    console.log(state);
+
+    localStorage.setItem("kontaktImie", state.kontaktImie);
+    var imie = localStorage.getItem("kontaktImie");
+
+    return {
+      ...state,
+      kontaktImie: localStorage.getItem("kontaktImie")
+    };
+  };
+  */
 
   const onClickSubmit = event => {
     event.preventDefault();
@@ -67,11 +91,11 @@ export const useFormularzKontaktowy = () => {
   };
 
   const onChangeImie = event => {
-    event.preventDefault();
-
     console.log("onChangeImie");
 
     const imie = event.target.value;
+
+    setImie(imie);
 
     dispatch({ type: actions.CHANGE_IMIE, payload: imie });
   };
@@ -89,14 +113,19 @@ export const useFormularzKontaktowy = () => {
     dispatch({ type: actions.CHANGE_EMAIL, payload: email });
   };
 
-  window.STAN = { ...state };
+  const onChangeRodo = event => {
+    const zgoda = event.target.value.includes("true");
+
+    dispatch({ type: actions.CHANGE_ZGODY_RODO, payload: zgoda });
+  };
 
   return {
     ...state,
     onClickSubmit,
     onChangeImie,
     onChangeNazwisko,
-    onChangeEmail
+    onChangeEmail,
+    onChangeRodo
   };
 };
 
