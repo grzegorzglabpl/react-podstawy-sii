@@ -5,7 +5,8 @@ const initialState = {
   clickSubmit: false,
   kontaktImie: "John",
   kontaktNazwisko: "Kowalsky",
-  kontaktEmail: "john@kowalsky.pl"
+  kontaktEmail: "john@kowalsky.pl",
+  poprawneAdresyEmail: []
 };
 
 const actions = {
@@ -58,8 +59,6 @@ const reducer = (state, action) => {
 export const useFormularzKontaktowy = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const [imie, setImie] = useState(state.kontaktImie);
-
   /*
   const repository = state => {
     console.log(state);
@@ -78,14 +77,25 @@ export const useFormularzKontaktowy = () => {
     event.preventDefault();
     console.log("onClickSubmit");
 
-    /*
     const formData = new FormData(event.target);
     var object = {};
     formData.forEach((value, key) => (object[key] = value));
-    var json = JSON.stringify(object, ["Imie"]);
+    var json = JSON.stringify(object);
 
-    console.log(json);
-  */
+    const url = "https://react-podstawy-sii.stackblitz.io/kontakt";
+
+    const options = {
+      method: "POST",
+      body: json,
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
+
+    fetch(url, options)
+      .then(res => res.json())
+      .then(res => console.log(res))
+      .catch(res => console.log(res));
 
     dispatch({ type: actions.CLICK_SUBMIT, payload: event.target });
   };
@@ -94,9 +104,6 @@ export const useFormularzKontaktowy = () => {
     console.log("onChangeImie");
 
     const imie = event.target.value;
-
-    setImie(imie);
-
     dispatch({ type: actions.CHANGE_IMIE, payload: imie });
   };
 

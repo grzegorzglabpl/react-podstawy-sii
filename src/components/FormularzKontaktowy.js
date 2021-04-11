@@ -1,10 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Hooks from "../hooks";
 import "./FormularzKontaktowy.css";
 import global from "../global";
 
 const FormularzKontaktowy = () => {
   const formularzKontaktowy = Hooks.useFormularzKontaktowy();
+
+  const [poprawneAdresyEmail, setPoprawneAdresyEmail] = useState([]);
+
+  useEffect(() => {
+    const getValidEmails = async () => {
+      let response = await fetch("dane.json");
+      let jsonData = await response.json();
+      console.log(jsonData);
+      setPoprawneAdresyEmail(jsonData);
+    };
+
+    getValidEmails();
+  }, []);
 
   //const [zgodaRodo, setZgodaRodo] = useState(true);
 
@@ -17,8 +30,6 @@ const FormularzKontaktowy = () => {
   console.log(kontaktNazwisko);
   console.log(kontaktEmail);
 */
-
-  console.log(formularzKontaktowy.zgodyRodo);
 
   return !formularzKontaktowy.clickSubmit ? (
     <form
@@ -81,6 +92,14 @@ const FormularzKontaktowy = () => {
           checked={!formularzKontaktowy.zgodyRodo}
           onChange={formularzKontaktowy.onChangeRodo}
         />
+      </fieldset>
+      <fieldset>
+        <legend>Poprawne Adresy Email</legend>
+        <ul>
+          {poprawneAdresyEmail.map(email => {
+            return <li>{email}</li>;
+          })}
+        </ul>
       </fieldset>
       <fieldset>
         <button type="submit">Wyślij</button>
