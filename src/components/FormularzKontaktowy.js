@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import Hooks from "../hooks";
 import "./FormularzKontaktowy.css";
 
 const FormularzKontaktowy = () => {
-  
+  const formularzKontaktowy = Hooks.useFormularzKontaktowy();
+
+  /*
   const [kontaktImie, setKontaktImie] = useState("John");
   const [kontaktNazwisko, setKontaktNazwisko] = useState("Kowalsky");
   const [kontaktEmail, setKontaktEmail] = useState("test@test.pola");
@@ -10,9 +13,14 @@ const FormularzKontaktowy = () => {
   console.log(kontaktImie);
   console.log(kontaktNazwisko);
   console.log(kontaktEmail);
+*/
 
   return (
-    <form id="formularzKontaktowy" className="formularzKontaktowy">
+    <form
+      id="formularzKontaktowy"
+      className="formularzKontaktowy"
+      onSubmit={formularzKontaktowy.onClickSubmit}
+    >
       <h1>Formularz kontaktowy</h1>
       <fieldset>
         <legend>Dane kontaktowe</legend>
@@ -24,8 +32,8 @@ const FormularzKontaktowy = () => {
           required
           minlength="4"
           maxlength="20"
-          value={kontaktImie}
-          onChange={e => setKontaktImie(e.target.value)}
+          value={formularzKontaktowy.kontaktImie}
+          onChange={formularzKontaktowy.onChangeImie}
         />
 
         <label for="nazwisko">Podaj nazwisko:</label>
@@ -33,16 +41,16 @@ const FormularzKontaktowy = () => {
           id="nazwisko"
           type="text"
           name="Nazwisko"
-          value={kontaktNazwisko}
-          onChange={e => setKontaktNazwisko(e.target.value)}
+          value={formularzKontaktowy.kontaktNazwisko}
+          onChange={formularzKontaktowy.onChangeNazwisko}
         />
         <label for="email">Podaj email:</label>
         <input
           id="email"
           type="email"
           name="Email"
-          value={kontaktEmail}
-          onChange={e => setKontaktEmail(e.target.value)}
+          value={formularzKontaktowy.kontaktEmail}
+          onChange={formularzKontaktowy.onChangeEmail}
           required
         />
 
