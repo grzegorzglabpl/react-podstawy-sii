@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useRoutes } from "hookrouter";
 import Routers from "./routers";
+import Hooks from "./hooks";
 
 import "./style.css";
 
 const Header = () => {
-  return <header>Naglowek</header>;
+  
+  const [imie, setImie] = useState("");
+
+  return (
+    <header>
+      <h1>Naglowek</h1>
+      <h2>Witaj {imie}</h2>
+    </header>
+  );
 };
 
 const Nav = () => {

@@ -89,6 +89,8 @@ export const useFormularzKontaktowy = () => {
     dispatch({ type: actions.CHANGE_EMAIL, payload: email });
   };
 
+  window.STAN = { ...state };
+
   return {
     ...state,
     onClickSubmit,
