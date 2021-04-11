@@ -2,7 +2,14 @@ import React, { useState } from "react";
 import "./FormularzKontaktowy.css";
 
 const FormularzKontaktowy = () => {
-  const [kontaktImie, setKontaktImie] = useState("Jan");
+  
+  const [kontaktImie, setKontaktImie] = useState("John");
+  const [kontaktNazwisko, setKontaktNazwisko] = useState("Kowalsky");
+  const [kontaktEmail, setKontaktEmail] = useState("test@test.pola");
+
+  console.log(kontaktImie);
+  console.log(kontaktNazwisko);
+  console.log(kontaktEmail);
 
   return (
     <form id="formularzKontaktowy" className="formularzKontaktowy">
@@ -18,13 +25,26 @@ const FormularzKontaktowy = () => {
           minlength="4"
           maxlength="20"
           value={kontaktImie}
-          onChange={}
+          onChange={e => setKontaktImie(e.target.value)}
         />
 
         <label for="nazwisko">Podaj nazwisko:</label>
-        <input id="nazwisko" type="text" name="Nazwisko" />
+        <input
+          id="nazwisko"
+          type="text"
+          name="Nazwisko"
+          value={kontaktNazwisko}
+          onChange={e => setKontaktNazwisko(e.target.value)}
+        />
         <label for="email">Podaj email:</label>
-        <input id="email" type="email" name="Email" required />
+        <input
+          id="email"
+          type="email"
+          name="Email"
+          value={kontaktEmail}
+          onChange={e => setKontaktEmail(e.target.value)}
+          required
+        />
 
         <div className="walidator">Niepoprawna wartosc dla pola imie</div>
       </fieldset>
