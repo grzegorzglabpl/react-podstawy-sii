@@ -15,7 +15,7 @@ const FormularzKontaktowy = () => {
   console.log(kontaktEmail);
 */
 
-  return (
+  return !formularzKontaktowy.clickSubmit ? (
     <form
       id="formularzKontaktowy"
       className="formularzKontaktowy"
@@ -24,19 +24,16 @@ const FormularzKontaktowy = () => {
       <h1>Formularz kontaktowy</h1>
       <fieldset>
         <legend>Dane kontaktowe</legend>
-        <label for="imie">Podaj imie:</label>
+        <label>Podaj imie:</label>
         <input
           id="imie"
           type="text"
           name="Imie"
-          required
-          minlength="4"
-          maxlength="20"
           value={formularzKontaktowy.kontaktImie}
           onChange={formularzKontaktowy.onChangeImie}
         />
 
-        <label for="nazwisko">Podaj nazwisko:</label>
+        <label>Podaj nazwisko:</label>
         <input
           id="nazwisko"
           type="text"
@@ -44,7 +41,7 @@ const FormularzKontaktowy = () => {
           value={formularzKontaktowy.kontaktNazwisko}
           onChange={formularzKontaktowy.onChangeNazwisko}
         />
-        <label for="email">Podaj email:</label>
+        <label>Podaj email:</label>
         <input
           id="email"
           type="email"
@@ -63,22 +60,14 @@ const FormularzKontaktowy = () => {
         <legend>Zgody na przetwarzanie RODO</legend>
       </fieldset>
       <fieldset>
-        <button
-          type="submit"
-          formmethod="get"
-          formaction="#form-kontakt-action-2"
-        >
-          Wyślij 1
-        </button>
+        <button type="submit">Wyślij 1</button>
         <button type="reset">Wyczyść</button>
-        <input
-          type="submit"
-          value="Wyślij 2"
-          formmethod="get"
-          formaction="#form-kontakt-action-2"
-        />
       </fieldset>
     </form>
+  ) : (
+    <section>
+      <h2>Dziękujemy za wysłanie formularza.</h2>
+    </section>
   );
 };
 
