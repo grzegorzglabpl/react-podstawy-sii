@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import "./FormularzKontaktowy.css";
 
 const FormularzKontaktowy = () => {
+  const [kontaktImie, setKontaktImie] = useState("Jan");
 
   return (
     <form id="formularzKontaktowy" className="formularzKontaktowy">
@@ -16,6 +17,8 @@ const FormularzKontaktowy = () => {
           required
           minlength="4"
           maxlength="20"
+          value={kontaktImie}
+          onChange={}
         />
 
         <label for="nazwisko">Podaj nazwisko:</label>
